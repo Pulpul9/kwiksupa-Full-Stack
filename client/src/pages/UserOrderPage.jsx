@@ -56,6 +56,7 @@ const UserOrderPage = () => {
                       className="w-16 h-16 object-cover rounded-lg border"
                     />
                     <p className="font-medium text-gray-800">{order.product_details?.name}</p>
+                    <p className="font-medium text-gray-800">{order.product_details?.quantity}</p>
                   </div>
 
                   <div className="text-sm text-gray-600 space-y-1">
