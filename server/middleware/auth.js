@@ -8,7 +8,7 @@ const auth = async (request, response, next) => {
 
     if (!token) {
       return response.status(401).json({
-        message: "Provide token",
+        message: "Click on Login...!!!",
         error: true,
         success: false
       })
