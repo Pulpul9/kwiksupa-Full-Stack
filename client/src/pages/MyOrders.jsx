@@ -86,9 +86,10 @@ const MyOrders = () => {
               {/* Order Total */}
               <div className="flex justify-end p-4 border-t font-semibold">
                 Total: ₹
-                <p className="font-semibold text-gray-900">
-                      ₹{order.totalAmt}
-                    </p>
+                {orderGroup.reduce(
+                  (sum, o) => sum + Number(o.totalAmt || 0),
+                  0
+                )}
               </div>
             </div>
           )
