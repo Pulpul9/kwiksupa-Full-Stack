@@ -5,78 +5,73 @@ import NoData from '../components/NoData'
 const UserOrderPage = () => {
   const orders = useSelector(state => state.orders.order) || []
 
-  // 🔹 Group by Order ID
+  // 🔹 Group by Order ID + DateTime
   const groupedOrders = orders.reduce((acc, order) => {
-    const key = order.orderId
+    const dateTimeKey = new Date(order.createdAt).toISOString()
+    const key = `${order.orderId}_${dateTimeKey}`
+
     if (!acc[key]) acc[key] = []
     acc[key].push(order)
+
     return acc
   }, {})
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      {/* Header */}
       <div className="bg-white shadow-md p-6 rounded-lg mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">My Orders</h1>
+        <h1 className="text-2xl font-bold">My Orders</h1>
       </div>
 
       {orders.length === 0 && <NoData />}
 
       <div className="space-y-6">
-        {Object.entries(groupedOrders).map(([orderId, orderItems]) => {
+        {Object.entries(groupedOrders).map(([key, orderItems]) => {
           const firstOrder = orderItems[0]
 
           return (
-            <div
-              key={orderId}
-              className="bg-white rounded-xl shadow border"
-            >
-              {/* 🔹 Order Header */}
-              <div className="flex justify-between items-start p-5 border-b">
+            <div key={key} className="bg-white rounded-xl shadow border">
+              {/* Header */}
+              <div className="flex justify-between p-5 border-b">
                 <div className="space-y-1">
-                  <p className="font-semibold text-gray-800">
-                    Order No: {orderId}
+                  <p className="font-semibold">
+                    Order No: {firstOrder.orderId}
                   </p>
                   <p className="text-sm text-gray-500">
                     Ordered On:{' '}
                     {new Date(firstOrder.createdAt).toLocaleString()}
                   </p>
 
-                  {/* ✅ User Details */}
                   <p className="text-sm">
-                    <span className="font-medium">Name:</span>{' '}
-                    {firstOrder.user_name}
+                    <b>Name:</b> {firstOrder.user_name}
                   </p>
                   <p className="text-sm">
-                    <span className="font-medium">Email:</span>{' '}
-                    {firstOrder.user_email}
+                    <b>Email:</b> {firstOrder.user_email}
                   </p>
                   <p className="text-sm">
-                    <span className="font-medium">Phone:</span>{' '}
-                    {firstOrder.delivery_address?.mobile}
+                    <b>Phone:</b> {firstOrder.delivery_address?.mobile}
                   </p>
                 </div>
 
-                <span className="text-xs px-3 py-1 rounded bg-green-100 text-green-700">
+                {/* <span className="text-xs px-3 py-1 rounded bg-green-100 text-green-700">
                   {firstOrder.payment_method}
-                </span>
+                </span> */}
               </div>
 
-              {/* 🔹 Products */}
+              {/* Products */}
               <div className="divide-y">
                 {orderItems.map(item => (
                   <div
                     key={item._id}
-                    className="flex items-center justify-between p-5"
+                    className="flex justify-between items-center p-5"
                   >
                     <div className="flex items-center gap-4">
                       <img
                         src={item.product_details?.image?.[0]}
-                        alt={item.product_details?.name}
-                        className="w-16 h-16 object-cover rounded border"
+                        className="w-16 h-16 rounded border object-cover"
+                        alt=""
                       />
                       <div>
-                        <p className="font-medium text-gray-800">
+                        <p className="font-medium">
                           {item.product_details?.name}
                         </p>
                         <p className="text-sm text-gray-500">
@@ -85,18 +80,16 @@ const UserOrderPage = () => {
                       </div>
                     </div>
 
-                    <p className="font-semibold text-gray-900">
-                      ₹{item.totalAmt}
-                    </p>
+                    <p className="font-semibold">₹{item.totalAmt}</p>
                   </div>
                 ))}
               </div>
 
-              {/* 🔹 Total */}
-              <div className="flex justify-end p-5 border-t font-semibold">
+              {/* Total */}
+              <div className="p-5 border-t text-right font-semibold">
                 Total: ₹
                 {orderItems.reduce(
-                  (sum, i) => sum + i.totalAmt,
+                  (sum, item) => sum + item.totalAmt,
                   0
                 )}
               </div>
