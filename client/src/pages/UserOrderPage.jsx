@@ -23,7 +23,7 @@ const groupedOrders = orders.reduce((acc, order) => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="bg-white shadow-md p-6 rounded-lg mb-6">
-        <h1 className="text-2xl font-bold">My Orders</h1>
+        <h1 className="text-2xl font-bold">User Orders Details</h1>
       </div>
 
       {orders.length === 0 && <NoData />}
