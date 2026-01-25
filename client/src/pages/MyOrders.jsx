@@ -76,20 +76,16 @@ const MyOrders = () => {
                       </p>
                     </div>
 
-                    <p className="font-semibold text-gray-900">
+                    {/* <p className="font-semibold text-gray-900">
                       ₹{order.totalAmt}
-                    </p>
+                    </p> */}
                   </div>
                 ))}
               </div>
 
               {/* Order Total */}
               <div className="flex justify-end p-4 border-t font-semibold">
-                Total: ₹
-                {orderGroup.reduce(
-                  (o) => Number(o.totalAmt || 0),
-                  0
-                )}
+                Total: ₹{Number(firstOrder.totalAmt || 0)}
               </div>
             </div>
           )
