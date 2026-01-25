@@ -5,16 +5,20 @@ import NoData from '../components/NoData'
 const UserOrderPage = () => {
   const orders = useSelector(state => state.orders.order) || []
 
-  // 🔹 Group by Order ID + DateTime
-  const groupedOrders = orders.reduce((acc, order) => {
-    const dateTimeKey = new Date(order.createdAt).toISOString()
-    const key = `${order.orderId}_${dateTimeKey}`
+  // Group by Order ID + DateTime
+const groupedOrders = orders.reduce((acc, order) => {
+  const dateTimeKey = new Date(order.createdAt).toISOString()
 
-    if (!acc[key]) acc[key] = []
-    acc[key].push(order)
+  // include user identity in grouping
+  const userKey = `${order.user_name}_${order.user_email}`
 
-    return acc
-  }, {})
+  const key = `${dateTimeKey}_${userKey}`
+
+  if (!acc[key]) acc[key] = []
+  acc[key].push(order)
+
+  return acc
+}, {})
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
