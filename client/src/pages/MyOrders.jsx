@@ -5,7 +5,7 @@ import NoData from '../components/NoData'
 const MyOrders = () => {
   const orders = useSelector(state => state.orders.order) || []
 
-  // Group orders by date + time
+  // 🔹 Group orders by date + time
   const groupedOrders = orders.reduce((acc, order) => {
     // group by full date-time (you can reduce precision if needed)
     const dateTimeKey = new Date(order.createdAt).toISOString()
@@ -76,9 +76,9 @@ const MyOrders = () => {
                       </p>
                     </div>
 
-                    {/* <p className="font-semibold text-gray-900">
+                    <p className="font-semibold text-gray-900">
                       ₹{order.totalAmt}
-                    </p> */}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -86,10 +86,9 @@ const MyOrders = () => {
               {/* Order Total */}
               <div className="flex justify-end p-4 border-t font-semibold">
                 Total: ₹
-                {orderGroup.reduce(
-                  (sum, o) => sum + o.totalAmt,
-                  0
-                )}
+                <p className="font-semibold text-gray-900">
+                      ₹{order.totalAmt}
+                    </p>
               </div>
             </div>
           )

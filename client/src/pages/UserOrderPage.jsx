@@ -91,11 +91,7 @@ const groupedOrders = orders.reduce((acc, order) => {
 
               {/* Total */}
               <div className="p-5 border-t text-right font-semibold">
-                Total: ₹
-                {orderItems.reduce(
-                  (sum, item) => sum + item.totalAmt,
-                  0
-                )}
+                Total: ₹ {item.totalAmt}
               </div>
             </div>
           )
