@@ -57,10 +57,14 @@ const Header = () => {
     // },[cartItem])
 
   return (
-    <header className='h-24 lg:h-20 lg:shadow-md sticky top-0 z-40 flex flex-col justify-center gap-1 bg-white'>
+    <header className='lg:shadow-md sticky top-0 z-40 bg-white'>
+        {/* Offer Slider */}
+        <div className="w-full bg-green-700 text-white text-center text-xs py-1">
+            🛒 Shop for ₹500 or more & get <span className="font-semibold">FREE delivery</span>!
+        </div>
         {
             !(isSearchPage && isMobile) && (
-                <div className='container mx-auto flex items-center px-2 justify-between'>
+                <div className='container mx-auto flex items-center px-2 justify-between h-16'>
                                 {/**logo */}
                                 <div className='h-full'>
                                     <Link to={"/"} className='h-full flex justify-center items-center'>

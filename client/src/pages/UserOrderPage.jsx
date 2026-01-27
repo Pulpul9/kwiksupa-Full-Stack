@@ -54,6 +54,9 @@ const groupedOrders = orders.reduce((acc, order) => {
                   <p className="text-sm">
                     <b>Phone:</b> {firstOrder.delivery_address?.mobile}
                   </p>
+                  <p className="text-sm">
+                    <b>Address:</b> {firstOrder.delivery_address?.address_line}
+                  </p>
                 </div>
 
                 {/* <span className="text-xs px-3 py-1 rounded bg-green-100 text-green-700">
