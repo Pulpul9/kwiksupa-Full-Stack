@@ -24,6 +24,7 @@ import CheckoutPage from "../pages/CheckoutPage";
 import Success from "../pages/Success";
 import Cancel from "../pages/Cancel";
 import UserOrderPage from "../pages/UserOrderPage";
+import ContactUs from "../pages/ContactUs";
 
 const router = createBrowserRouter([
     {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
                     {
                         path : 'userorder',
                         element : <AdminPermision><UserOrderPage/></AdminPermision>
+                    },
+                    {
+                        path : "contactus",
+                        element : <ContactUs/>
                     }
                 ]
             },
