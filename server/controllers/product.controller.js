@@ -129,7 +129,7 @@ export const getProductByCategory = async(request,response)=>{
 
 export const getProductByCategoryAndSubCategory  = async(request,response)=>{
     try {
-        const { categoryId,subCategoryId,page,limit } = request.body
+        const { categoryId,subCategoryId,page = 1,limit = 1000 } = request.body
 
         if(!categoryId || !subCategoryId){
             return response.status(400).json({
@@ -139,13 +139,13 @@ export const getProductByCategoryAndSubCategory  = async(request,response)=>{
             })
         }
 
-        if(!page){
-            page = 1
-        }
+        // if(!page){
+        //     page = 1
+        // }
 
-        if(!limit){
-            limit = 10
-        }
+        // if(!limit){
+        //     limit = 10
+        // }
 
         const query = {
             category : { $in :categoryId  },
