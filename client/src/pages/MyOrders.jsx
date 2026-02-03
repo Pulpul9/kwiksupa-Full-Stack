@@ -72,7 +72,7 @@ const MyOrders = () => {
                         {order.product_details?.name}
                       </p>
                       <p className="text-sm text-gray-500">
-                        Qty: {order.product_details?.unit} * {order.product_details?.quantity}
+                        Qty: {order.product_details?.quantity}
                       </p>
                     </div>
 
