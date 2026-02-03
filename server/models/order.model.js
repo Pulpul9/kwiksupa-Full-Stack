@@ -30,6 +30,7 @@ const orderSchema = new mongoose.Schema({
         name : String,
         image : Array,
         quantity : Number,
+        unit : String,
     },
     paymentId : {
         type : String,
