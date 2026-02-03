@@ -82,7 +82,7 @@ const groupedOrders = orders.reduce((acc, order) => {
                           {item.product_details?.name}
                         </p>
                         <p className="text-sm text-gray-500">
-                          Qty: {item.product_details?.quantity}
+                          Qty: {item.product_details?.unit} * {item.product_details?.quantity}
                         </p>
                       </div>
                     </div>
