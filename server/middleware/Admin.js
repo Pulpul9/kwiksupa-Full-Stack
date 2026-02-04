@@ -24,3 +24,6 @@ export const admin = async(request,response,next)=>{
         })
     }
 }
+
+
+export default admin
