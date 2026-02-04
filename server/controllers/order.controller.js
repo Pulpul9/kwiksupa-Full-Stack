@@ -38,7 +38,6 @@ import mongoose from "mongoose";
                 } ,
                 paymentId : "",
                 payment_status : "CASH ON DELIVERY",
-                order_status: "PENDING",
                 delivery_address : addressId ,
                 subTotalAmt  : subTotalAmt,
                 totalAmt  :  totalAmt<500 ? totalAmt+50:totalAmt,
@@ -262,27 +261,3 @@ export async function getUserOrderDetailsController(request, response) {
   }
 }
 
-export async function updateOrderStatusController(req, res) {
-  try {
-    const { orderId } = req.params
-    const { status } = req.body // "DELIVERED"
-
-    const updatedOrder = await OrderModel.updateMany(
-      { orderId },
-      { order_status: status }
-    )
-
-    return res.json({
-      message: "Order status updated",
-      success: true,
-      error: false,
-      data: updatedOrder
-    })
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-      success: false,
-      error: true
-    })
-  }
-}
