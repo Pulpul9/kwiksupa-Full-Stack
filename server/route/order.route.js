@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import auth from '../middleware/auth.js'
-import { CashOnDeliveryOrderController, getOrderDetailsController, getUserOrderDetailsController } from '../controllers/order.controller.js'
+import { CashOnDeliveryOrderController, getOrderDetailsController, getUserOrderDetailsController, markOrderDeliveredController } from '../controllers/order.controller.js'
+import { admin } from '../middleware/Admin.js'
 
 const orderRouter = Router()
 
@@ -9,6 +10,6 @@ orderRouter.post("/cash-on-delivery",auth,CashOnDeliveryOrderController)
 // orderRouter.post('/webhook',webhookStripe)
 orderRouter.get("/order-list",auth,getOrderDetailsController)
 orderRouter.get("/user-order-list",auth,getUserOrderDetailsController)
-
+orderRouter.patch("/order/delivered/:orderId",auth,admin,markOrderDeliveredController)
 
 export default orderRouter
