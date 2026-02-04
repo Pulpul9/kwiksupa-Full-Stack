@@ -50,7 +50,7 @@ const MyOrders = () => {
                 </div>
 
                 <span className="text-xs px-3 py-1 rounded bg-green-100 text-green-700">
-                  {firstOrder.order_status}
+                  {firstOrder.payment_status}
                 </span>
               </div>
 

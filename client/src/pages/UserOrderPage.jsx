@@ -20,25 +20,6 @@ const groupedOrders = orders.reduce((acc, order) => {
   return acc
 }, {})
 
-const handleMarkDelivered = async (orderId) => {
-  try {
-    await fetch(
-      `/api/order/delivered/${orderId}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      }
-    )
-
-    // refetch orders OR update redux state
-  } catch (error) {
-    console.error(error)
-  }
-}
-
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="bg-white shadow-md p-6 rounded-lg mb-6">
@@ -78,26 +59,9 @@ const handleMarkDelivered = async (orderId) => {
                   </p>
                 </div>
 
-                <div className="flex flex-col items-end gap-2">
-                  <span
-                    className={`text-xs px-3 py-1 rounded ${
-                      firstOrder.order_status === "DELIVERED"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {firstOrder.order_status}
-                  </span>
-
-                  {firstOrder.order_status === "PENDING" && (
-                    <button
-                      onClick={() => handleMarkDelivered(firstOrder.orderId)}
-                      className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
-                    >
-                      Mark as Delivered
-                    </button>
-                  )}
-                </div>
+                {/* <span className="text-xs px-3 py-1 rounded bg-green-100 text-green-700">
+                  {firstOrder.payment_method}
+                </span> */}
               </div>
 
               {/* Products */}

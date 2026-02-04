@@ -39,16 +39,6 @@ const orderSchema = new mongoose.Schema({
         type : String,
         default : ""
     },
-    payment_method: {
-        type: String,
-        enum: ["CASH ON DELIVERY", "ONLINE"],
-        required: true
-    },
-    order_status: {
-        type: String,
-        enum: ["PENDING", "DELIVERED"],
-        default: "PENDING"
-    },
     delivery_address : {
         type : mongoose.Schema.ObjectId,
         ref : 'address'
