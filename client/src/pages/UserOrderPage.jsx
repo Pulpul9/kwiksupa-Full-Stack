@@ -24,20 +24,17 @@ const groupedOrders = orders.reduce((acc, order) => {
 
 const handleMarkDelivered = async (orderId) => {
   try {
-    const response = await fetch(
-      `${SummaryApi.updateOrderStatus.url}`,
-      {
-        method: SummaryApi.updateOrderStatus.method,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          orderId,
-          status: 'DELIVERED'
-        })
-      }
-    )
+    const response = await fetch('/api/order/update-status', {
+  method: 'PUT',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    orderId,
+    status: 'DELIVERED'
+  })
+})
 
     const data = await response.json()
 
