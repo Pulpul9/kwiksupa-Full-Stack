@@ -38,6 +38,7 @@ import mongoose from "mongoose";
                 } ,
                 paymentId : "",
                 payment_status : "CASH ON DELIVERY",
+                order_status: "PLACED",
                 delivery_address : addressId ,
                 subTotalAmt  : subTotalAmt,
                 totalAmt  :  totalAmt<500 ? totalAmt+50:totalAmt,
@@ -261,3 +262,25 @@ export async function getUserOrderDetailsController(request, response) {
   }
 }
 
+
+export const updateOrderStatusController = async (request, response) => {
+  try {
+    const { orderId } = request.params
+
+    const order = await OrderModel.updateMany(
+      { orderId },
+      { order_status: "DELIVERED" }
+    )
+
+    return response.json({
+      success: true,
+      message: "Order marked as Delivered"
+    })
+
+  } catch (error) {
+    response.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+}

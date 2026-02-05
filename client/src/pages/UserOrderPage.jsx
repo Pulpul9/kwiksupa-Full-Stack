@@ -20,6 +20,16 @@ const groupedOrders = orders.reduce((acc, order) => {
   return acc
 }, {})
 
+
+const markAsDelivered = async (orderId) => {
+  await axios.put(
+    `/admin/order/delivered/${orderId}`,
+    {},
+    { withCredentials: true }
+  )
+}
+
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="bg-white shadow-md p-6 rounded-lg mb-6">
@@ -59,9 +69,24 @@ const groupedOrders = orders.reduce((acc, order) => {
                   </p>
                 </div>
 
-                {/* <span className="text-xs px-3 py-1 rounded bg-green-100 text-green-700">
-                  {firstOrder.payment_method}
-                </span> */}
+                <span
+                  className={`text-xs px-3 py-1 rounded 
+                    ${firstOrder.order_status === "DELIVERED"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-yellow-100 text-yellow-700"
+                    }`}
+                >
+                  {firstOrder.order_status}
+
+                  {firstOrder.order_status !== "DELIVERED" && (
+                    <button
+                      onClick={() => markAsDelivered(firstOrder.orderId)}
+                      className="px-4 py-2 text-sm bg-blue-600 text-white rounded"
+                    >
+                      Mark as Delivered
+                    </button>
+                  )}
+                </span>
               </div>
 
               {/* Products */}
