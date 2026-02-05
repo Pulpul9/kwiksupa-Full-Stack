@@ -13,7 +13,6 @@ orderRouter.get("/user-order-list",auth,getUserOrderDetailsController)
 orderRouter.put(
   "/update-status",
   auth,
-  admin,
   updateOrderStatusController
 )
 
