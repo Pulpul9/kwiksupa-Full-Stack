@@ -11,7 +11,7 @@ orderRouter.post("/cash-on-delivery",auth,CashOnDeliveryOrderController)
 orderRouter.get("/order-list",auth,getOrderDetailsController)
 orderRouter.get("/user-order-list",auth,getUserOrderDetailsController)
 orderRouter.put(
-  "/admin/order/delivered/:orderId",
+  "/update-status",
   auth,
   admin,
   updateOrderStatusController

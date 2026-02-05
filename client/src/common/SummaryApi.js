@@ -157,10 +157,10 @@ const SummaryApi = {
         url : '/api/order/user-order-list',
         method : 'get'
     },
-    updateOrderStatus: (orderId) => ({
-        url: '/api/order/admin/order/delivered/${orderId}',
-        method: 'put'
-    })
+    updateOrderStatus : {
+        url : '/api/order/update-status',
+        method : 'put'
+    }
 
 }
 

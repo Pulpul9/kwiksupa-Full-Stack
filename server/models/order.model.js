@@ -40,10 +40,10 @@ const orderSchema = new mongoose.Schema({
         type : String,
         default : ""
     },
-    order_status: {
-        type: String,
-        enum: ["PLACED", "DELIVERED"],
-        default: "PLACED"
+    order_status : {
+        type : String,
+        enum : ["PLACED", "PROCESSING", "SHIPPED", "DELIVERED"],
+        default : "PLACED"
     },
     delivery_address : {
         type : mongoose.Schema.ObjectId,
