@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import NoData from '../components/NoData'
 import axios from "axios";
+import Axios from '../utils/Axios';
 
 const UserOrderPage = () => {
   const orders = useSelector(state => state.orders.order) || []
@@ -23,12 +24,18 @@ const groupedOrders = orders.reduce((acc, order) => {
 
 
 const markAsDelivered = async (orderId) => {
-  await axios.put(
-    `/api/order/admin/order/delivered/${orderId}`,
-    {},
-    { withCredentials: true }
-  )
+  try {
+    const response = await Axios({
+      ...SummaryApi.updateOrderStatus(orderId),
+      withCredentials: true
+    })
+
+    console.log(response.data)
+  } catch (error) {
+    console.error(error)
+  }
 }
+
 
 
   return (
