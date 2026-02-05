@@ -24,7 +24,7 @@ const groupedOrders = orders.reduce((acc, order) => {
 
 const markAsDelivered = async (orderId) => {
   await axios.put(
-    `/admin/order/delivered/${orderId}`,
+    `/api/order/admin/order/delivered/${orderId}`,
     {},
     { withCredentials: true }
   )
