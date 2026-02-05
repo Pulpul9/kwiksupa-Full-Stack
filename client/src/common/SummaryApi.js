@@ -156,10 +156,6 @@ const SummaryApi = {
     getUserOrderItems : {
         url : '/api/order/user-order-list',
         method : 'get'
-    },
-    updateOrderStatus : {
-        url : '/api/order/update-status',
-        method : 'put'
     }
 
 }

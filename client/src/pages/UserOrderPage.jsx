@@ -1,11 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import NoData from '../components/NoData'
-import SummaryApi from '../common/SummaryApi'
 
 const UserOrderPage = () => {
   const orders = useSelector(state => state.orders.order) || []
-  const user = useSelector(state => state.user.user)
+
   // Group by Order ID + DateTime
 const groupedOrders = orders.reduce((acc, order) => {
   const dateTimeKey = new Date(order.createdAt).toISOString()
@@ -20,32 +19,6 @@ const groupedOrders = orders.reduce((acc, order) => {
 
   return acc
 }, {})
-
-
-const handleMarkDelivered = async (orderId) => {
-  try {
-    const response = await fetch('/api/order/update-status', {
-  method: 'PUT',
-  credentials: 'include',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    orderId,
-    status: 'DELIVERED'
-  })
-})
-
-    const data = await response.json()
-
-    if (data.success) {
-      // Ideally re-fetch orders here
-      window.location.reload()
-    }
-  } catch (error) {
-    console.error(error)
-  }
-}
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -86,25 +59,9 @@ const handleMarkDelivered = async (orderId) => {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <span className={`text-xs px-3 py-1 rounded 
-                    ${firstOrder.order_status === "DELIVERED"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-yellow-100 text-yellow-700"}
-                  `}>
-                    {firstOrder.order_status}
-                  </span>
-
-                  {firstOrder.order_status !== "DELIVERED" && (
-                    <button
-                      onClick={() => handleMarkDelivered(firstOrder.orderId)}
-                      className="text-xs px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700"
-                    >
-                      Mark as Delivered
-                    </button>
-                  )}
-                </div>
-
+                {/* <span className="text-xs px-3 py-1 rounded bg-green-100 text-green-700">
+                  {firstOrder.payment_method}
+                </span> */}
               </div>
 
               {/* Products */}

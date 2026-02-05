@@ -262,25 +262,3 @@ export async function getUserOrderDetailsController(request, response) {
   }
 }
 
-export async function updateOrderStatusController(req, res) {
-  try {
-    const { orderId, status } = req.body
-
-    const updatedOrder = await OrderModel.updateMany(
-      { orderId },
-      { order_status: status }
-    )
-
-    res.json({
-      success: true,
-      error: false,
-      message: "Order status updated"
-    })
-
-  } catch (error) {
-    res.status(500).json({
-      error: true,
-      message: error.message
-    })
-  }
-}
