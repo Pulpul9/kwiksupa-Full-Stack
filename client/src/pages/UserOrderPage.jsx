@@ -95,7 +95,7 @@ const handleMarkDelivered = async (orderId) => {
                     {firstOrder.order_status}
                   </span>
 
-                  {user?.role === "ADMIN" && firstOrder.order_status !== "DELIVERED" && (
+                  {firstOrder.order_status !== "DELIVERED" && (
                     <button
                       onClick={() => handleMarkDelivered(firstOrder.orderId)}
                       className="text-xs px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700"
