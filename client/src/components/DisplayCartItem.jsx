@@ -46,7 +46,7 @@ const DisplayCartItem = ({close}) => {
 
     let deliveryCharge = 50
 
-    if (nonOilTotal >= 500) {
+    if (nonOilTotal >= 700) {
         deliveryCharge = 0
     }
 

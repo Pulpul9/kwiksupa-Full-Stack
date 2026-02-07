@@ -17,10 +17,38 @@ import mongoose from "mongoose";
             success: false
         })
         }
-
+        
         const { role, email, name } = user 
 
         const { list_items, totalAmt, addressId,subTotalAmt } = request.body 
+
+        // Calculate oil and non-oil totals
+        let oilTotal = 0
+        let nonOilTotal = 0
+
+        list_items.forEach(item => {
+            const productName = item.productId.name.toLowerCase().trim()
+            const price = Number(item.productId.price)
+            const discount = Number(item.productId.discount || 0)
+            const qty = Number(item.quantity)
+
+            const discountAmount = Math.ceil((price * discount) / 100)
+            const finalPrice = (price - discountAmount) * qty
+
+            if (productName.endsWith("oil")) {
+                oilTotal += finalPrice
+            } else {
+                nonOilTotal += finalPrice
+            }
+        })
+
+        // Delivery logic
+        let deliveryCharge = 50
+        if (nonOilTotal >= 700) {
+        deliveryCharge = 0
+        }
+
+        const finalTotal = totalAmt + deliveryCharge
 
         const payload = list_items.map(el => {
             return({
@@ -41,7 +69,7 @@ import mongoose from "mongoose";
                 order_status : "PLACED",
                 delivery_address : addressId ,
                 subTotalAmt  : subTotalAmt,
-                totalAmt  :  totalAmt<500 ? totalAmt+50:totalAmt,
+                totalAmt  :  finalTotal,
             })
         })
 

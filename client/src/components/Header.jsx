@@ -60,7 +60,7 @@ const Header = () => {
     <header className='lg:shadow-md sticky top-0 z-40 bg-white'>
         {/* Offer Slider */}
         <div className="w-full bg-green-700 text-white text-center text-xs py-1">
-            🛒 Shop for ₹500 or more & get <span className="font-semibold">FREE delivery</span>!
+            🛒 Shop for ₹700 or more (excluding oil) & get <span className="font-semibold">FREE delivery</span>!
         </div>
         {
             !(isSearchPage && isMobile) && (
