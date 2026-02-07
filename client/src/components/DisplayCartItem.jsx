@@ -27,7 +27,29 @@ const DisplayCartItem = ({close}) => {
         toast("Please Login")
     }
 
-    const deliveryCharge = totalPrice < 500 ? 50 : 0
+    let oilTotal = 0
+    let nonOilTotal = 0
+
+    cartItem.forEach(item => {
+        const name = item?.productId?.name?.toLowerCase().trim()
+        const price = pricewithDiscount(
+            item?.productId?.price,
+            item?.productId?.discount
+        ) * item?.quantity
+
+        if (name.endsWith("oil")) {
+            oilTotal += price
+        } else {
+            nonOilTotal += price
+        }
+    })
+
+    let deliveryCharge = 50
+
+    if (nonOilTotal >= 500) {
+        deliveryCharge = 0
+    }
+
     const finalAmount = totalPrice + deliveryCharge
 
   return (
