@@ -77,7 +77,28 @@ const CheckoutPage = () => {
     }
   }
 
-  const deliveryCharge = totalPrice < 500 ? 50 : 0
+  // calculate total of non-oil items
+    const nonOilTotal = cartItemsList.reduce((total, item) => {
+    const product = item.productId
+
+    const name = product?.name?.toLowerCase().trim()
+
+    // detect oil product
+    const isOil = name?.endsWith("oil")
+
+    if (!isOil) {
+      const price = Number(product.price)
+      const discount = Number(product.discount || 0)
+      const discountAmount = Math.ceil((price * discount) / 100)
+      const finalPrice = (price - discountAmount) * item.quantity
+
+      total += finalPrice
+    }
+
+    return total
+  }, 0)
+
+  const deliveryCharge = nonOilTotal >= 700 ? 0 : 50
   const finalAmount = totalPrice + deliveryCharge
 
   return (
