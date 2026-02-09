@@ -109,19 +109,29 @@ const ProductListPage = () => {
           <div>
 
            <div className='min-h-[80vh] max-h-[80vh] overflow-y-auto relative'>
-            <div className=' grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 '>
-                {
-                  data.map((p, index) => {
-                    return (
-                      <CardProduct
-                        data={p}
-                        key={p._id + "productSubCategory" + index}
-                      />
-                    )
-                  })
-                }
-              </div>
-           </div>
+              {data.length === 0 && !loading ? (
+                <div className="flex items-center justify-center h-[60vh]">
+                  <div className="text-center">
+                    <p className="text-xl font-semibold text-gray-700">
+                      No products available
+                    </p>
+                    <p className="text-gray-500 mt-2">
+                      Products will be added soon. Please check back later.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4'>
+                  {data.map((p, index) => (
+                    <CardProduct
+                      data={p}
+                      key={p._id + "productSubCategory" + index}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
 
             {
               loading && (
