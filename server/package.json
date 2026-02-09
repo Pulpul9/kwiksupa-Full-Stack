@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "vercel-build": "cd client && npm install && npm run build"
+    "vercel-build": "cd client && rm -rf node_modules && npm install && npm run build"
   },
   "engines": {
     "node": "20.x"
